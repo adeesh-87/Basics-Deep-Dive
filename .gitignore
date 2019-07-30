@@ -1,0 +1,6 @@
+*.out
+*.o
+*.exe
+Obj/
+Exe/
+target/
