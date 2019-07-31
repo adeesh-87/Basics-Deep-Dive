@@ -4,3 +4,6 @@
 Obj/
 Exe/
 target/
+obj/
+exe/
+build/
