@@ -16,7 +16,7 @@ void print_array(int arr[], int size);
 using namespace std;
 using namespace std::chrono;
 
-int main() {
+void sorting_tests() {
 	srand(time(NULL));
 	cout << "**********************************************************************" << endl;
 	cout << "                      Executing Tests                                 " << endl;
@@ -36,7 +36,6 @@ int main() {
 	cout << "**********************************************************************" << endl;
 	cout << "Number of tests = " << num_tests << " Passed = " << num_tests_pass  << " Failed = " << (num_tests - num_tests_pass) << endl;
 	
-	return 0;
 }
 
 void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), int test_array_size) {
@@ -45,6 +44,7 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 	int *rand_array_addr = rand_array, *rand_array_reference_addr = rand_array_reference;
 	int result;
 	num_tests++;
+	
 	for (int i = 0; i < test_array_size; i++) {
 		rand_array[i] = rand();
 		rand_array_reference[i] = rand_array[i];

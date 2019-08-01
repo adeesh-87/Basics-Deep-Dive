@@ -10,7 +10,8 @@ DEFINES := \
 
 SRCS := \
 	src/quicksort.cpp \
-	src/sorting_tests.cpp
+	src/sorting_tests.cpp \
+	src/tester_main.cpp
 	
 OBJS := $(addprefix $(OBJS_FOLDER)/, $(patsubst $(SRC_FOLDER)/%.cpp,%.o,$(SRCS)))
 	
@@ -20,7 +21,7 @@ $(OBJS_FOLDER)/%.o: $(SRC_FOLDER)/%.cpp
 .PHONY: all clean fake directories
 	
 all: directories $(OBJS)
-	g++ -o $(EXE_FOLDER)/$(PROJECT_NAME) $(OBJS_FOLDER)/quicksort.o $(OBJS_FOLDER)/sorting_tests.o
+	g++ -o $(EXE_FOLDER)/$(PROJECT_NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)
