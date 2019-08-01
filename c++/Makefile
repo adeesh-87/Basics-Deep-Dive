@@ -2,7 +2,7 @@ PROJECT_NAME := sorting_basics
 
 SRC_FOLDER := src
 OBJS_FOLDER := build/objs
-
+EXE_FOLDER := build/exe
 INCLUDES := -I./includes/
 
 DEFINES := \
@@ -20,14 +20,14 @@ $(OBJS_FOLDER)/%.o: $(SRC_FOLDER)/%.cpp
 .PHONY: all clean fake directories
 	
 all: directories $(OBJS)
-	g++ -o $(PROJECT_NAME) $(OBJS_FOLDER)/quicksort.o $(OBJS_FOLDER)/sorting_tests.o
+	g++ -o $(EXE_FOLDER)/$(PROJECT_NAME) $(OBJS_FOLDER)/quicksort.o $(OBJS_FOLDER)/sorting_tests.o
 
 clean:
 	rm -f $(OBJS)
 	rm -f $(PROJECT_NAME)
 
 test: all
-	@"./$(PROJECT_NAME)"
+	@"./$(EXE_FOLDER)/$(PROJECT_NAME)"
 
 fake:
 	echo $(OBJS)
