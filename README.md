@@ -1,5 +1,6 @@
 # Basics-Deep-Dive
 
-Quicksort in C++ make options:
-Option 1: Lomuto partitioning
-Option 2: Hoare partitioning
+All references for quicksort are taken from https://en.wikipedia.org/wiki/Quicksort  
+Quicksort in C++ tests:  
+Test cases 1: Lomuto partitioning  
+Test cases 2: Hoare partitioning  
