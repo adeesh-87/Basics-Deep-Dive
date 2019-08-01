@@ -15,7 +15,7 @@ SRCS := \
 OBJS := $(addprefix $(OBJS_FOLDER)/, $(patsubst $(SRC_FOLDER)/%.cpp,%.o,$(SRCS)))
 	
 $(OBJS_FOLDER)/%.o: $(SRC_FOLDER)/%.cpp
-	g++ -c -Wall $(INCLUDES) $(DEFINES) -o $@ $<
+	g++ -Wall -g -c -std=c++11 $(INCLUDES) $(DEFINES) -o $@ $<
 
 .PHONY: all clean fake directories
 	
