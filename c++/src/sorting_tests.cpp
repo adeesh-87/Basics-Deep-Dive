@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <quicksort.hpp>
 #include <bits/stdc++.h>
-
+#include <chrono>
 
 
 volatile q_sort_schema_t q_sort_partition_style;
@@ -14,6 +14,7 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 void print_array(int arr[], int size);
 
 using namespace std;
+using namespace std::chrono;
 
 int main() {
 	srand(time(NULL));
@@ -49,16 +50,22 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 		rand_array_reference[i] = rand_array[i];
 	}
 	sort(rand_array_reference_addr, (rand_array_reference_addr+test_array_size));
+	auto start = high_resolution_clock::now(); 
 	sorter((rand_array_addr), (test_array_size-1));
+	auto stop = high_resolution_clock::now();
+	
+	auto duration = duration_cast<microseconds>(stop - start); 
 	result = ( check_arrays_equal(rand_array_addr, rand_array_reference_addr, test_array_size) ? 1 : 0 );
+	
 	cout << "Test " << num_tests << " ";
 	if(result)
 	{
 		num_tests_pass++;
-		cout << "Pass" << endl;
+		cout << "Pass";
 	} else {
-		cout << "Fail" << endl;
+		cout << "Fail";
 	}
+	cout << " in " << duration.count() << " usecs" << endl;
 	/* Did just for confirmation
 	if(test_array_size < 50) {
 		print_array(rand_array, test_array_size);
