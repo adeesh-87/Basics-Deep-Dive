@@ -1,2 +1,3 @@
+#define LOMUTO       1
 
-void sort_ints(int **p_array, int array_size);
+void q_sort(int *p_array, int low, int high);
