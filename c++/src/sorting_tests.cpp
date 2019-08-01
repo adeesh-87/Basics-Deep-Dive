@@ -1,25 +1,38 @@
 #include <iostream>
 #include <cstdlib>
 #include <quicksort.hpp>
+#include <bits/stdc++.h>
 
-const int list_size = 5;
-int list[list_size];
-int *list_addr;
+
+const int rand_array_size = 100;
+int rand_array[rand_array_size];
+int rand_array_copy[rand_array_size];
+int *rand_array_addr, *rand_array_copy_addr;
+
+
 using namespace std;
 
 int main() {
 	srand(time(NULL));
-	for(int i = 0; i<list_size; i++)
+	
+	
+
+	sort(rand_array_copy_addr, (rand_array_copy_addr+rand_array_size));
+	q_sort((rand_array_addr), 0, (rand_array_size-1));
+	int check_var;
+	
+	for(int i = 0; i<rand_array_size; i++)
 	{
-		list[i] = rand() % 100;
+		if(rand_array[i] != rand_array_copy[i])
+		{
+			check_var++;
+		}
 	}
-	list_addr = list;
-	sort_ints((&list_addr),list_size);
-	cout << "list : ";
-	for(int i = 0; i<list_size; i++)
-	{
-		cout << list[i] << ", ";
+	if(check_var) {
+		cout << "Fail :(!" << endl;
+	} else {
+		cout << "Success!" << endl;
 	}
-	cout << endl;
 	return 0;
 }
+
