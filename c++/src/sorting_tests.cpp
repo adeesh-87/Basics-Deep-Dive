@@ -46,14 +46,18 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 	int result;
 	num_tests++;
 	for (int i = 0; i < test_array_size; i++) {
-		rand_array[i] = rand() % 100;
+		rand_array[i] = rand();
 		rand_array_reference[i] = rand_array[i];
 	}
+	auto start_ref = high_resolution_clock::now();
 	sort(rand_array_reference_addr, (rand_array_reference_addr+test_array_size));
+	auto stop_ref = high_resolution_clock::now();
+	
 	auto start = high_resolution_clock::now(); 
 	sorter((rand_array_addr), (test_array_size-1));
 	auto stop = high_resolution_clock::now();
 	
+	auto duration_ref = duration_cast<microseconds>(stop_ref - start_ref);
 	auto duration = duration_cast<microseconds>(stop - start); 
 	result = ( check_arrays_equal(rand_array_addr, rand_array_reference_addr, test_array_size) ? 1 : 0 );
 	
@@ -65,7 +69,7 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 	} else {
 		cout << "Fail";
 	}
-	cout << " in " << duration.count() << " usecs" << endl;
+	cout << " in " << duration.count() << " [ref: " << duration_ref.count() << "]" << " usecs" << endl;
 	/* Did just for confirmation
 	if(test_array_size < 50) {
 		print_array(rand_array, test_array_size);
