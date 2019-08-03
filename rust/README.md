@@ -2,8 +2,6 @@
 
 > This is a series, which is still in progress. The source code is will be modified.
 
----
-
 ## To Compile Rust
 
 `> cargo build`
