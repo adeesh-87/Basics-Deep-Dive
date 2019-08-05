@@ -1,7 +1,8 @@
 use std::io;
 mod quick_sort;
+mod merge_sort;
 
-fn main() {
+fn quick_sort() {
     let mut vec_value: Vec<u32> = Vec::new();
     let mut buf = String::new(); 
     println!("Enter no of variables for Sort ");
@@ -18,4 +19,8 @@ fn main() {
     for v in vec_value.iter() {
         println!("{}",v )
     }
+}
+
+fn main() {
+    quick_sort();
 }
