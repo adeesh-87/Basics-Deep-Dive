@@ -1,6 +1,7 @@
 use std::io;
 mod quick_sort;
 mod merge_sort;
+mod bubble_sort;
 
 fn quick_sort() {
     let mut vec_value: Vec<u32> = Vec::new();
