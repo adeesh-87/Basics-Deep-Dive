@@ -8,3 +8,5 @@ obj/
 exe/
 build/
 *.lock
+~bkup/
+deps/
