@@ -7,4 +7,3 @@ enum q_sort_schema_t
 
 
 void q_sort_start(int *p_array, int size);
-void q_sort(int *p_array, int low, int high);

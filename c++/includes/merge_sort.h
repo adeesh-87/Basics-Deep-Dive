@@ -1,0 +1,1 @@
+void merge_sort_start(int *p_array, int size);

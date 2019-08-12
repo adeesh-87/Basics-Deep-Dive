@@ -1,9 +1,11 @@
 #include <iostream>
 #include <cstdlib>
 #include <quicksort.hpp>
+#include <merge_sort.h>
 #include <bits/stdc++.h>
 #include <chrono>
-
+#include <sorting_tests.h>
+#include <gtest/gtest.h>
 
 volatile q_sort_schema_t q_sort_partition_style;
 int num_tests, num_tests_pass;
@@ -16,26 +18,48 @@ void print_array(int arr[], int size);
 using namespace std;
 using namespace std::chrono;
 
+TEST(quick_sort_test, generate_and_compare)
+{
+	sorting_tests();
+	ASSERT_EQ(num_tests, num_tests_pass);
+}
+
 void sorting_tests() {
 	srand(time(NULL));
 	cout << "**********************************************************************" << endl;
-	cout << "                      Executing Tests                                 " << endl;
+	cout << "                      Executing Quicksort Lomuto Tests" << endl;
 	cout << "**********************************************************************" << endl;
-	
 	// LOMUTO tests
 	q_sort_partition_style = LOMUTO;
-	tester_with_rand_generator(q_sort_start, 10);
 	tester_with_rand_generator(q_sort_start, 23);
 	tester_with_rand_generator(q_sort_start, 42);
 	tester_with_rand_generator(q_sort_start, 200);
 	tester_with_rand_generator(q_sort_start, 500);
 	tester_with_rand_generator(q_sort_start, 1000);
-	tester_with_rand_generator(q_sort_start, 10000);
+	tester_with_rand_generator(q_sort_start, 100000);
 	cout << "**********************************************************************" << endl;
-	cout << "                      Lomuto Test Results                             " << endl;
+	cout << "                      Lomuto Test Results" << endl;
 	cout << "**********************************************************************" << endl;
 	cout << "Number of tests = " << num_tests << " Passed = " << num_tests_pass  << " Failed = " << (num_tests - num_tests_pass) << endl;
 	
+	// ************************************************************************************************************************************
+	
+	cout << "**********************************************************************" << endl;
+	cout << "                      Executing Merge sort Tests" << endl;
+	cout << "**********************************************************************" << endl;
+	// LOMUTO tests
+	q_sort_partition_style = LOMUTO;
+	tester_with_rand_generator(merge_sort_start, 23);
+	tester_with_rand_generator(merge_sort_start, 42);
+	tester_with_rand_generator(merge_sort_start, 200);
+	tester_with_rand_generator(merge_sort_start, 500);
+	tester_with_rand_generator(merge_sort_start, 1000);
+	tester_with_rand_generator(merge_sort_start, 100000);
+	cout << "**********************************************************************" << endl;
+	cout << "                      Mmerge sort Test Results" << endl;
+	cout << "**********************************************************************" << endl;
+	cout << "Number of tests = " << num_tests << " Passed = " << num_tests_pass  << " Failed = " << (num_tests - num_tests_pass) << endl;
+
 }
 
 void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), int test_array_size) {
@@ -46,7 +70,7 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 	num_tests++;
 	
 	for (int i = 0; i < test_array_size; i++) {
-		rand_array[i] = rand();
+		rand_array[i] = rand()%100;
 		rand_array_reference[i] = rand_array[i];
 	}
 	auto start_ref = high_resolution_clock::now();
@@ -54,7 +78,7 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 	auto stop_ref = high_resolution_clock::now();
 	
 	auto start = high_resolution_clock::now(); 
-	sorter((rand_array_addr), (test_array_size-1));
+	sorter((rand_array_addr), (test_array_size));
 	auto stop = high_resolution_clock::now();
 	
 	auto duration_ref = duration_cast<microseconds>(stop_ref - start_ref);
@@ -79,7 +103,7 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 
 void print_array(int arr[], int size) {
 	cout << "Array: " << arr[0];
-	for (int i = 0; i < size; i++) {
+	for (int i = 1; i < size; i++) {
 		cout << ", " << arr[i];
 	}
 	cout << endl;

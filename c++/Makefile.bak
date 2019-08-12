@@ -1,0 +1,43 @@
+PROJECT_NAME := sorting_basics
+
+SRC_FOLDER := src
+OBJS_FOLDER := build/objs
+EXE_FOLDER := build/exe
+CPPUTEST_HOME := deps/cpputest/a_build_dir
+
+DEFINES := 
+
+INCLUDES := -I./includes/
+
+SRCS := \
+	src/quicksort.cpp \
+	src/tester_main.cpp
+	
+OBJS := $(addprefix $(OBJS_FOLDER)/, $(notdir $(SRCS:%.cpp=%.o)))
+
+CPPFLAGS = -Wall -g -c -std=c++11
+CPPFLAGS += -I$(CPPUTEST_HOME)/include
+
+LD_LIBRARIES = -L$(CPPUTEST_HOME)/lib -lCppUTest -lCppUTestExt
+
+$(OBJS_FOLDER)/%.o: $(SRC_FOLDER)/%.cpp
+	g++ $(CPPFLAGS) $(INCLUDES) $(DEFINES) -o $@ $<
+
+.PHONY: all clean fake directories
+	
+all: directories $(OBJS)
+	g++ $(LD_LIBRARIES) -o $(EXE_FOLDER)/$(PROJECT_NAME) $(OBJS)
+
+clean:
+	rm -f $(OBJS)
+	rm -f $(PROJECT_NAME)
+
+test: all
+	@"./$(EXE_FOLDER)/$(PROJECT_NAME)"
+
+fake:
+	echo $(OBJS)
+	
+directories:
+	mkdir -p build/objs
+	mkdir -p build/exe

@@ -1,12 +1,15 @@
 #include <iostream>
 #include <quicksort.hpp>
 
-int partition(int *p_array, int low, int high);
+static int partition(int *p_array, int low, int high);
+static void q_sort(int *p_array, int low, int high);
+
 extern q_sort_schema_t q_sort_partition_style;
+
 using namespace std;
 
 void q_sort_start(int *p_array, int size) {
-	q_sort(p_array, 0, size);
+	q_sort(p_array, 0, (size-1));
 }
 
 void q_sort(int *p_array, int low, int high) {
