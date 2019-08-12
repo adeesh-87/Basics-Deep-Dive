@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <quicksort.hpp>
 #include <merge_sort.h>
+#include <bubble_sort.h>
 #include <bits/stdc++.h>
 #include <chrono>
 #include <sorting_tests.h>
@@ -18,18 +19,11 @@ void print_array(int arr[], int size);
 using namespace std;
 using namespace std::chrono;
 
-TEST(quick_sort_test, generate_and_compare)
-{
-	sorting_tests();
-	ASSERT_EQ(num_tests, num_tests_pass);
-}
-
 void sorting_tests() {
 	srand(time(NULL));
 	cout << "**********************************************************************" << endl;
 	cout << "                      Executing Quicksort Lomuto Tests" << endl;
 	cout << "**********************************************************************" << endl;
-	// LOMUTO tests
 	q_sort_partition_style = LOMUTO;
 	tester_with_rand_generator(q_sort_start, 23);
 	tester_with_rand_generator(q_sort_start, 42);
@@ -47,8 +41,6 @@ void sorting_tests() {
 	cout << "**********************************************************************" << endl;
 	cout << "                      Executing Merge sort Tests" << endl;
 	cout << "**********************************************************************" << endl;
-	// LOMUTO tests
-	q_sort_partition_style = LOMUTO;
 	tester_with_rand_generator(merge_sort_start, 23);
 	tester_with_rand_generator(merge_sort_start, 42);
 	tester_with_rand_generator(merge_sort_start, 200);
@@ -56,7 +48,23 @@ void sorting_tests() {
 	tester_with_rand_generator(merge_sort_start, 1000);
 	tester_with_rand_generator(merge_sort_start, 100000);
 	cout << "**********************************************************************" << endl;
-	cout << "                      Mmerge sort Test Results" << endl;
+	cout << "                      Merge sort Test Results" << endl;
+	cout << "**********************************************************************" << endl;
+	cout << "Number of tests = " << num_tests << " Passed = " << num_tests_pass  << " Failed = " << (num_tests - num_tests_pass) << endl;
+	
+	// ************************************************************************************************************************************
+	
+	cout << "**********************************************************************" << endl;
+	cout << "                      Executing Bubble sort Tests" << endl;
+	cout << "**********************************************************************" << endl;
+	tester_with_rand_generator(bubble_sort, 23);
+	tester_with_rand_generator(bubble_sort, 42);
+	tester_with_rand_generator(bubble_sort, 200);
+	tester_with_rand_generator(bubble_sort, 500);
+	tester_with_rand_generator(bubble_sort, 1000);
+	tester_with_rand_generator(bubble_sort, 5000);
+	cout << "**********************************************************************" << endl;
+	cout << "                      Bubble sort Test Results" << endl;
 	cout << "**********************************************************************" << endl;
 	cout << "Number of tests = " << num_tests << " Passed = " << num_tests_pass  << " Failed = " << (num_tests - num_tests_pass) << endl;
 
@@ -70,7 +78,7 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 	num_tests++;
 	
 	for (int i = 0; i < test_array_size; i++) {
-		rand_array[i] = rand()%100;
+		rand_array[i] = rand();
 		rand_array_reference[i] = rand_array[i];
 	}
 	auto start_ref = high_resolution_clock::now();
@@ -85,15 +93,15 @@ void tester_with_rand_generator(void (*sorter)(int * p_array, int array_size), i
 	auto duration = duration_cast<microseconds>(stop - start); 
 	result = ( check_arrays_equal(rand_array_addr, rand_array_reference_addr, test_array_size) ? 1 : 0 );
 	
-	cout << "Test " << num_tests << " ";
 	if(result)
 	{
 		num_tests_pass++;
-		cout << "Pass";
+		cout << "\033[32m[Pass]\033[0m";
 	} else {
-		cout << "Fail";
+		cout << "\033[31m[Fail]\033[0m";
 	}
-	cout << " in " << duration.count() << " [ref: " << duration_ref.count() << "]" << " usecs" << endl;
+	cout << " Test " << num_tests << " ";
+	cout << "in " << duration.count() << " [ref: " << duration_ref.count() << "]" << " usecs" << endl;
 	/* Did just for confirmation
 	if(test_array_size < 50) {
 		print_array(rand_array, test_array_size);

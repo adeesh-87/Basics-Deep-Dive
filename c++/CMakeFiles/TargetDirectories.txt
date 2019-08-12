@@ -1,3 +1,0 @@
-/mnt/d/My_work/Basics-Deep-Dive/c++/CMakeFiles/edit_cache.dir
-/mnt/d/My_work/Basics-Deep-Dive/c++/CMakeFiles/rebuild_cache.dir
-/mnt/d/My_work/Basics-Deep-Dive/c++/CMakeFiles/executeTests.dir

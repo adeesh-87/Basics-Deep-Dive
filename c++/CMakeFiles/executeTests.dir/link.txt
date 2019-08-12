@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/executeTests.dir/src/tester_main.cpp.o CMakeFiles/executeTests.dir/src/merge_sort.cpp.o CMakeFiles/executeTests.dir/src/sorting_tests.cpp.o CMakeFiles/executeTests.dir/src/quicksort.cpp.o  -o executeTests -rdynamic -Wl,-Bstatic -lgtest -Wl,-Bdynamic -lpthread 
